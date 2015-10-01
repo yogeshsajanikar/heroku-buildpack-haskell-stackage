@@ -1,0 +1,26 @@
+#!/bin/sh
+
+function indent() {
+  c='s/^/       /'
+  case $(uname) in
+    Darwin) sed -l "$c";;
+    *)      sed -u "$c";;
+  esac
+}
+
+BUILD_DIR=$1
+CACHE_DIR=$2
+ENV_DIR=$3
+
+echo "-----> Compiling with stack $(stack --version)"
+echo "-----> Using $(stack path --ghc-paths)"
+echo "-----> Building at ${BUILD_DIR}"
+pushd $BUILD_DIR
+stack build
+
+echo "-----> Installing at $(stack path --local-install-path)"
+popd
+
+
+
+
