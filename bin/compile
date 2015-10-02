@@ -25,11 +25,12 @@ echo "-----> Installing stackage at $STACK_BIN_PATH"
 if !(test -d $STACK_BIN_PATH/stack)
 then
     echo "-----> Downloading and extracting $STACK_URL"
-    pushd $STACK_INSTALL_BASEDIR
-    curl -O $STACK_URL
+    CURRDIR=$(pwd)
+    cd $STACK_INSTALL_BASEDIR
+    curl -L -O $STACK_URL
     tar xzvf $STACK_ARCH_FILE
     rm $STACK_ARCH_FILE
-    popd
+    cd $CURRDIR
 fi
 
 export PATH=$PATH:$STACK_BIN_PATH
@@ -53,7 +54,7 @@ ENV_DIR=$3
 echo "-----> Compiling with stack $(stack --version)"
 echo "-----> Using $(stack path --ghc-paths)"
 echo "-----> Building at ${BUILD_DIR}"
-pushd $BUILD_DIR
+cd $BUILD_DIR
 stack build
 
 echo "-----> Installing at $(stack path --local-install-path)"
