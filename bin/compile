@@ -1,4 +1,8 @@
-#!/bin/sh
+#!/bin/bash
+
+set -e            # fail fast
+set -o pipefail   # do not ignore exit codes when piping output
+
 
 echo "-----> Setting up stackage environment"
 
@@ -33,6 +37,7 @@ then
     cd $CURRDIR
 fi
 
+echo "-----> $(ls /usr/lib/libgmp*)"
 export PATH=$PATH:$STACK_BIN_PATH
 
 # GHC_MAJOR_VERSION=7.10.2
