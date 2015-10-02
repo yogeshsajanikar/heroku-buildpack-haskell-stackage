@@ -4,6 +4,10 @@ set -e            # fail fast
 set -o pipefail   # do not ignore exit codes when piping output
 
 
+echo "-----> Setting up cedar 14 specific environment"
+apt-get update
+apt-get install -y build-essential git pigz zlib1g-dev
+
 echo "-----> Setting up stackage environment"
 
 STACK_VERSION=0.1.5.0
@@ -37,7 +41,6 @@ then
     cd $CURRDIR
 fi
 
-echo "-----> $(ls /usr/lib/libgmp*)"
 export PATH=$PATH:$STACK_BIN_PATH
 
 # GHC_MAJOR_VERSION=7.10.2
