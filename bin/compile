@@ -35,13 +35,13 @@ fi
 
 export PATH=$PATH:$STACK_BIN_PATH
 
-GHC_MAJOR_VERSION=7.10.2
+# GHC_MAJOR_VERSION=7.10.2
 
-if !(test -n $(stack path --ghc-paths))
-then
-    echo "-----> Setting up default environment with GHC $GHC_MAJOR_VERSION"
-    stack setup ${GHC_MAJOR_VERSION}
-fi
+# if !(test -n $(stack path --ghc-paths))
+# then
+#     echo "-----> Setting up default environment with GHC $GHC_MAJOR_VERSION"
+#     stack setup ${GHC_MAJOR_VERSION}
+# fi
 
 
 
@@ -55,6 +55,7 @@ echo "-----> Compiling with stack $(stack --version)"
 echo "-----> Using $(stack path --ghc-paths)"
 echo "-----> Building at ${BUILD_DIR}"
 cd $BUILD_DIR
+stack setup
 stack build
 
 echo "-----> Installing at $(stack path --local-install-path)"
